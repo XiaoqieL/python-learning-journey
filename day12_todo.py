@@ -2,6 +2,7 @@
 
 import os
 
+
 class TodoList:
     def __init__(self, filename="todo.txt"):
         self.filename = filename
@@ -14,7 +15,7 @@ class TodoList:
             with open(self.filename, "r", encoding="utf-8") as f:
                 for line in f:
                     try:
-                        done, txt = line.strip().split("|", 1)
+                        done, text = line.strip().split("|", 1)
                         self.todos.append({"text": text, "done": done == "V"})
                     except ValueError:
                         continue
@@ -44,6 +45,7 @@ class TodoList:
                 mark = "V" if item["done"] else " "
                 f.write(f"{mark}|{item['text']}\n")
         print(f"已保存到 {self.filename}")
+
 
 # 使用
 todo = TodoList()
