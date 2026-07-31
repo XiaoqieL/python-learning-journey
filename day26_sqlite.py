@@ -31,7 +31,7 @@ print("students 表创建成功")
 print("\n==== 插入数据=====")
 
 # 单条插入
-cursor.execute("INSERT INTO student(name, age, score, grade) VALUES (?, ?, ?, ?)",
+cursor.execute("INSERT INTO students(name, age, score, grade) VALUES (?, ?, ?, ?)",
                ("小杰", 28, 92.5, "优秀"))
 
 conn.commit()
@@ -47,7 +47,7 @@ students_data = [
     ("周九", 23, 48.0, "不及格"),
 ]
 cursor.executemany(
-    "INSERT INTO student(name, age, score, grade) VALUES (?, ?, ?, ?)",
+    "INSERT INTO students(name, age, score, grade) VALUES (?, ?, ?, ?)",
     students_data
 )
 conn.commit()
@@ -89,11 +89,11 @@ for grade, count in cursor.fetchall():
 # ===== 5. 更新数据（U - Update）======
 print("\n==== 更新数据=====")
 cursor.execute("UPDATE students SET score = ?, grade = ? WHERE name = ?",
-               (85.0, "良好", "钱七"))
+               (90.0, "良好", "钱七"))
 conn.commit()
 print(f"钱七的分数已更新为85分(影响{cursor.rowcount}行)")
 
-cursor.execute("SELECT name, score, grade FRPM students WHERE name = '钱七")
+cursor.execute("SELECT name, score, grade FROM students WHERE name = '钱七")
 print(f"验证结果：{cursor.fetchall()}")
 
 # ===== 6. 删除数据（D - Delete）======
