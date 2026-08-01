@@ -43,30 +43,29 @@ except Exception as e:
 
     # ====== 网络不通时用本地HTML练习 ======
     sample_html = """
-    <html>
-      <head><title>测试页面</title></head>
-      <body>
-        <h1>换欢迎来到爬虫入门</h1>
-        <div class="news>
-          <h2>新闻列表</h2>
-          <ul>
-            <li><a href="/news/1">第一条新闻</a><span>2026-7-30</span></li>
-            <li><a href="/news/1">第二条新闻</a><span>2026-7-29</span></li>
-            <li><a href="/news/1">第三条新闻</a><span>2026-7-28</span></li>
-          </ul>
-        </div>
-        <div class="product>
-          <h2>产品列表</h2>
-          <div class="item"><h3>手机</h3><p class="price">￥2999</p></div>
-          <div class="item"><h3>电脑</h3><p class="price">￥5999</p></div>
-          <div class="item"><h3>耳机</h3><p class="price">￥599</p></div>
-        </div>
-      </body>
-    </html>   
-    """
+        <html>
+          <head><title>测试页面</title></head>
+          <body>
+            <h1>欢迎来到爬虫入门</h1>
+            <div class="news">
+              <h2>新闻列表</h2>
+              <ul>
+                <li><a href="/news/1">第一条新闻</a><span>2026-07-30</span></li>
+                <li><a href="/news/2">第二条新闻</a><span>2026-07-29</span></li>
+                <li><a href="/news/3">第三条新闻</a><span>2026-07-28</span></li>
+              </ul>
+            </div>
+            <div class="product">
+              <h2>产品列表</h2>
+              <div class="item"><h3>手机</h3><p class="price">¥2999</p></div>
+              <div class="item"><h3>电脑</h3><p class="price">¥5999</p></div>
+              <div class="item"><h3>耳机</h3><p class="price">¥599</p></div>
+            </div>
+          </body>
+        </html>
+        """
 
     soup = BeautifulSoup(sample_html, "lxml")
-
 
     # 找标题
     print(f"标题：{soup.title.get_text()}")
@@ -75,19 +74,19 @@ except Exception as e:
     # 找到所有新闻标题 + 链接 + 日期
     print("\n===== 解析新闻列表=====")
     new_list = soup.select(".new li")  # CSS选择器
-    for i in new_list:
+    for li in new_list:
         a_tag = li.find("a")
         date = li.find("span").get_text()
         print(f"   标题：{a_tag.get_text()}, 链接：{a_tag['href']}, 日期：{date}")
 
     # 找产品和价格
     print("\n===== 解析产品列表=====")
-    prouduct = soup.select(".product .item")
+    product = soup.select(".product .item")
     total_price = 0
-    for p in prouduct:
+    for p in product:
         name = p.find("h3").get_text()
         price_text = p.select_one(".price").get_text()
-        price_num = int(re.sub(r"\D", "", price_text)) # 提取数字
+        price_num = int(re.sub(r"\D", "", price_text))  # 提取数字
         total_price += price_num
         print(f"   {name}: {price_text} (数值：{price_num})")
 
