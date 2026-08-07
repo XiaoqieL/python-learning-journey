@@ -12,9 +12,9 @@ try:
     print(f"响应JSON：{resp.json()}")
 except Exception as e:
     print(f"网络不通：{e}")
-    print(f"网络不通：{e}")
 
-#===== 2. POST请求：提交数据 =====
+
+# ===== 2. POST请求：提交数据 =====
 print("\n=====POST请求====")
 try:
     data = {"username": "admin", "password": "123456"}
@@ -40,6 +40,7 @@ except Exception as e:
 # ===== 4. 写一个接口测试函数（测试工程师日常）=====
 print("\n==== 接口测试函数示例 ====")
 
+
 def test_api(url, method="GET", params=None, json_data=None, expected_code=200):
     """通用接口测试函数"""
     try:
@@ -52,11 +53,12 @@ def test_api(url, method="GET", params=None, json_data=None, expected_code=200):
 
         # 断言状态码
         if resp.status_code == expected_code:
-            return  True, f"PASS - 状态码{resp.status_code}"
+            return True, f"PASS - 状态码{resp.status_code}"
         else:
             return False, f"FAIL - 期望{expected_code}, 实际{resp.status_code}"
     except Exception as e:
-        return  False, f"ERROR - {e}"
+        return False, f"ERROR - {e}"
+
 
 # 测试用例
 test_cases = [
