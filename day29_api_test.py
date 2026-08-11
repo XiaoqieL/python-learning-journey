@@ -7,18 +7,17 @@ import json
 # ===== 1. GET请求：获取数据 =====
 print("=====GET请求======")
 try:
-    resp = requests.get("https://httpbin.org/get", params={"name": "小杰", "age": 28}, timeout=10)
+    resp = requests.get("https://jsonplaceholder.typicode.com/users", params={"name": "小杰", "age": 28}, timeout=30)
     print(f"状态码：{resp.status_code}")
     print(f"响应JSON：{resp.json()}")
 except Exception as e:
     print(f"网络不通：{e}")
 
-
 # ===== 2. POST请求：提交数据 =====
 print("\n=====POST请求====")
 try:
     data = {"username": "admin", "password": "123456"}
-    resp = requests.post("https://httpbin.org/post", json=data, timeout=10)
+    resp = requests.post("https://jsonplaceholder.typicode.com/post", json=data, timeout=30)
     print(f"状态码：{resp.status_code}")
     result = resp.json()
     print(f"服务端端收到：{result.get('json', {})}")
@@ -28,7 +27,7 @@ except Exception as e:
 # ===== 3. requests核心属性（记住这5个）=====
 print("\n==== 核心属性 =====")
 try:
-    resp = requests.get("https://httpbin.org/get", timeout=10)
+    resp = requests.get("https://jsonplaceholder.typicode.com/get", timeout=30)# httpbin.org
     print(f"resp.status_code  → 状态码: {resp.status_code}")
     print(f"resp.text         → 文本：{resp.text[:50]}...")
     print(f"resp.json()       → JSON：{type(resp.json())}")
@@ -41,13 +40,13 @@ except Exception as e:
 print("\n==== 接口测试函数示例 ====")
 
 
-def test_api(url, method="GET", params=None, json_data=None, expected_code=200):
+def api_test(url, method="GET", params=None, json_data=None, expected_code=200):
     """通用接口测试函数"""
     try:
         if method == "GET":
-            resp = requests.get(url, params=params, timeout=10)
+            resp = requests.get(url, params=params, timeout=30)
         elif method == "POST":
-            resp = requests.post(url, json=json_data, timeout=10)
+            resp = requests.post(url, json=json_data, timeout=30)
         else:
             return False, f"不支持方法：{method}"
 
@@ -62,15 +61,15 @@ def test_api(url, method="GET", params=None, json_data=None, expected_code=200):
 
 # 测试用例
 test_cases = [
-    ("GET接口测试", "https://httpbin.org/get", "GET", {"q": "test"}, None, 200),
-    ("POST接口测试", "https://httpbin.org/post", "POST", None, {"name": "test"}, 200),
-    ("404测试", "https://httpbin.org/notexist", "GET", None, None, 404),
+    ("GET接口测试", "https://jsonplaceholder.typicode.com/get", "GET", {"q": "test"}, None, 200),
+    ("POST接口测试", "https://jsonplaceholder.typicode.com/post", "POST", None, {"name": "test"}, 200),
+    ("404测试", "https://jsonplaceholder.typicode.com/notexist", "GET", None, None, 404),
 ]
 
 print(f"{'用例名':<16} {'结果':<8} {'详情'}")
 print("-" * 50)
 for name, url, method, params, data, code in test_cases:
-    passed, msg = test_api(url, method, params, data, code)
+    passed, msg = api_test(url, method, params, data, code)
     status = "✓ PASS" if passed else "✗ FAIL"
     print(f"{name:<16} {status:<8} {msg}")
 
