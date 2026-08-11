@@ -19,18 +19,15 @@ def fetch_data():
     # 模拟爬取的结果（结构和真是爬出来的一样）
     # 实际工作中，这里会用requests.get + BeautifulSoup 抓网页
     raw_date = [
-        {"title": " Python入门教程  ", "author": "  张三 ", "price": "¥299元", "date": "2026/07/01",
-         "url": "https://example.com/1"},
+        {"title": " Python入门教程  ", "author": "  张三 ", "price": "¥299元", "date": "2026/07/01","url": "https://example.com/1"},
         {"title": "爬虫实战指南!", "author": "李四", "price": "399", "date": "2026-07-15", "url": "https://example.com/2"},
-        {"title": "   数据库原理与实践   ", "author": "王五", "price": "¥199", "date": "2026.06.20",
-         "url": "https://example.com/3"},
+        {"title": "   数据库原理与实践   ", "author": "王五", "price": "¥199", "date": "2026.06.20","url": "https://example.com/3"},
         {"title": "算法与数据结构", "author": "赵六  ", "price": "499元", "date": "2026/08/01", "url": "https://example.com/4"},
         {"title": "网络协议详解", "author": "钱七", "price": "¥259", "date": "2026-07-28", "url": "https://example.com/5"},
         {"title": "测试自动化完整教程", "author": " 孙八", "price": "359", "date": "2026.07.10", "url": "https://example.com/6"},
         {"title": "面向对象设计模式", "author": "周九", "price": "¥449元", "date": "2026/06/25", "url": "https://example.com/7"},
         {"title": "Git版本控制实战", "author": "吴十", "price": "99", "date": "2026-07-05", "url": "https://example.com/8"},
-        {"title": "   数据结构与算法", "author": "郑十一 ", "price": "¥399", "date": "2026.07.20",
-         "url": "https://example.com/9"},
+        {"title": "   数据结构与算法", "author": "郑十一 ", "price": "¥399", "date": "2026.07.20","url": "https://example.com/9"},
         {"title": "并发编程", "author": "王十二", "price": "¥299", "date": "2026/07/12", "url": "https://example.com/10"},
     ]
     print(f"   爬取到{len(raw_date)} 条原始数据")
@@ -87,7 +84,7 @@ def clean_data(raw_list):
 
 
 # ===== 第3步：存入数据库 =====
-def save_to_db(data, db_file="day_28_course.db"):
+def save_to_db(data, db_file="day28_courses.db"):
     """数据存入SQLite"""
     print("[3/5] 正在保存数据到数据库...")
 
@@ -112,7 +109,7 @@ def save_to_db(data, db_file="day_28_course.db"):
     # 批量插入
     cur.executemany("""
         INSERT INTO courses(title, author, price, publish_date, url, crawl_time)
-        VALUES (:title, :author, :price, :publish_date, "url, :crawl_time)
+        VALUES (:title, :author, :price, :publish_date, :url, :crawl_time)
     """, data)
     conn.commit()
 
@@ -133,7 +130,7 @@ def export_files(data):
     with open(csv_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=data[0].keys())
         writer.writeheader()
-        writer.writerow(data)
+        writer.writerows(data)
     print(f"   CSV已导出：{csv_path}")
 
     # JSON
@@ -197,7 +194,7 @@ def analyze(db_file="day28_courses.db"):
 
     # 2026年7月之后的课程
     cur.execute("""
-         SELECT title, publish_date FROM courses 
+        SELECT title, publish_date FROM courses 
         WHERE publish_date >= '2026-07-01' 
         ORDER BY publish_date DESC
     """)
