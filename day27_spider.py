@@ -10,9 +10,9 @@ print("====1. 发送HTTP请求=====")
 try:
     # 请求网页(headers模拟浏览器，防止被反爬)
     headers = {
-        "User-Agent": "Mozila/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
-    resp = requests.get("http://httpbin.org/html", headers=headers, timeout=10)
+    resp = requests.get("https://httpbin.org/html", headers=headers, timeout=30)
 
     print(f"状态码：{resp.status_code}")
     print(f"响应长度：{len(resp.text)}字符")
@@ -73,7 +73,7 @@ except Exception as e:
 
     # 找到所有新闻标题 + 链接 + 日期
     print("\n===== 解析新闻列表=====")
-    new_list = soup.select(".new li")  # CSS选择器
+    new_list = soup.select(".news li")  # CSS选择器
     for li in new_list:
         a_tag = li.find("a")
         date = li.find("span").get_text()
