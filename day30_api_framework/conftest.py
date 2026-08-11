@@ -1,10 +1,17 @@
+
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 import pytest
 from api_client import APIClient
+
 
 @pytest.fixture
 def api():
     """每个测试用例都能用的APIClient实例"""
-    return APIClient
+    return APIClient()
+
 
 @pytest.fixture
 def new_user_data():

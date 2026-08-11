@@ -6,6 +6,7 @@ from config import BASE_URL, TIMEOUT
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
+
 class APIClient:
     def __init__(self, base_url=BASE_URL):
         self.base_url = base_url
@@ -40,10 +41,10 @@ class APIClient:
         return self.get("/users")
 
     def get_user(self, user_id):
-        return self.get(f"/user/{user_id}")
+        return self.get(f"/users/{user_id}")
 
-    def cteate_user(self, data):
-        return self.post("/user", json_data=data)
+    def create_user(self, data):
+        return self.post("/users", json_data=data)
 
     # 帖子相关接口
     def get_posts(self):
@@ -53,7 +54,7 @@ class APIClient:
         return self.get(f"/posts/{post_id}")
 
     def create_post(self, data):
-        return self.post("/post", json_data=data)
+        return self.post("/posts", json_data=data)
 
     def delete_post(self, post_id):
         return self.delete(f"/posts/{post_id}")

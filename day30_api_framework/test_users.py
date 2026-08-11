@@ -1,14 +1,15 @@
 import pytest
 
+
 class TestUsers:
 
     def test_get_all_user(self, api):
         """测试获取所有用户"""
-        resp = api.get_user()
+        resp = api.get_users()
         assert resp.status_code == 200
         users = resp.json()
         assert len(users) > 0
-        assert  isinstance(users, list)
+        assert isinstance(users, list)
 
     @pytest.mark.parametrize("user_id, expected_name", [
         (1, "Leanne Graham"),
@@ -39,7 +40,7 @@ class TestUsers:
 
     def test_user_has_email(self, api):
         """测试用户数据结构：每个用户必须有email"""
-        resp = api.get_user()
+        resp = api.get_users()
         users = resp.json()
         for user in users:
             assert "email" in user, f"用户{user.get('id')}没有email"

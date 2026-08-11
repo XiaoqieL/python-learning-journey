@@ -1,5 +1,6 @@
 import pytest
 
+
 class TestPosts:
 
     def test_get_all_posts(self, api):
@@ -16,6 +17,7 @@ class TestPosts:
         assert post["id"] == post_id
         assert "title" in post
         assert "body" in post
+        assert "userId" in post
 
     def test_create_post(self, api):
         post_data = {
@@ -24,6 +26,9 @@ class TestPosts:
             "userId": 1
         }
         resp = api.create_post(post_data)
+        print(f"请求URL: {resp.url}")  # 看看实际请求地址
+        print(f"状态码: {resp.status_code}")  # 确认状态码
+        print(f"响应内容: {resp.text}")  # 服务器返回了什么
         assert resp.status_code == 201
         result = resp.json()
         assert result["title"] == "Python测试"
