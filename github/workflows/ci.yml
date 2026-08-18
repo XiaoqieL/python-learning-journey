@@ -1,0 +1,48 @@
+# GitHub Actions CI 配置
+# 当你 push 代码到 GitHub 时，会自动触发这个流程
+
+name: Python CI
+
+# 触发条件：push 到 main 分支或发 PR 时
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    # 运行在Ubuntu 虚拟机上(GitHub免费提供)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 第一步： 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 第二步：安装Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      # 第三步： 安装依赖
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-html requsests playwright
+          playwright install chromium
+
+      # 第四步： 运行测试
+      - name: Run tests
+        run: |
+          cd day33_test_project
+          pytest -v --html=report.html --self-contained-html
+
+      # 第五步： 上传测试报告
+      - name: Upload test report
+        if: always() #即使测试失败也上传报告
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: day33_test_project/report.html
