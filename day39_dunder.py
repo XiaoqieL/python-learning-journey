@@ -31,8 +31,8 @@ class Student:
         return len(self.name)
 
     # __add__: 支持 对象+对象
-    def __add__(self, other):
-        return self.score + other.score
+    def __add__(self, other, three):
+        return self.score + other.score + three.score
 
     # __getitem__: 支持 对象[索引]取值
     def __getitem__(self, key):
@@ -69,7 +69,8 @@ print(f"排序后：{[s.name for s in students]}")
 print(f"len(s1): {len(s1)}")
 
 # __add__: 支持 + 运算
-print(f"s1 + s2 + s3 = {s1 + s2 + s3}")
+# print(f"s1 + s2  = { s1 + s3}")
+print(s1.__add__(s2, s3))
 
 # __getitem__: 支持 [] 取值
 print(f"s1['name']: {s1['name']}")
