@@ -54,7 +54,7 @@ def generate_log(filename="sample.log", count=200):
             level = random.choice(levels)
             msg = random.choice(messages[level])
             ts = start_time + timedelta(seconds=random.randint(0, 3600 * 12))
-            f.write(f"{ts.strptime('%Y-%m-%d %H:%M:%S')} [{level}] {msg}\n")
+            f.write(f"{ts.strftime('%Y-%m-%d %H:%M:%S')} [{level}] {msg}\n")
 
     print(f"生成 {count} 条日志到 {filename}")
 

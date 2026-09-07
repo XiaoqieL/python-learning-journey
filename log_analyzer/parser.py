@@ -2,7 +2,7 @@
 
 import re
 from collections import Counter
-from models import LogEntry, AnalysisReport, LogLevel
+from log_analyzer.models import LogEntry, AnalysisReport, LogLevel
 
 
 class LogParser:
@@ -16,9 +16,9 @@ class LogParser:
     )
 
     def __init__(self):
-        self.entries: list[LogEntry] = []
+        self.entries = []
 
-    def parse_line(self, line: str) -> LogEntry | None:
+    def parse_line(self, line: str):
         """解析单行日志"""
         match = self.PATTERN.match(line.strip())
         if not match:
@@ -81,11 +81,11 @@ class LogParser:
             time_range=time_range,
         )
 
-    def filter_by_level(self, level: str) -> list[LogEntry]:
+    def filter_by_level(self, level: str):
         """按级别过滤日志"""
         return [e for e in self.entries if e.level == level]
 
-    def search_keyword(self, keyword: str) -> list[LogEntry]:
+    def search_keyword(self, keyword: str):
         """关键词搜索"""
         return [e for e in self.entries if keyword.lower() in e.message.lower()]
 

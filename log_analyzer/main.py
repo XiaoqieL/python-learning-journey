@@ -1,7 +1,8 @@
 # ============ 日志分析系统 - 入口 ============
 
 from log_analyzer.parser import LogParser
-from models import AnalysisReport
+from log_analyzer.models import AnalysisReport
+from log_analyzer.log_generator import generate_log
 
 
 def show_report(report: AnalysisReport):
@@ -66,7 +67,7 @@ def main():
             filename = input("日志文件名(默认sample.log): ") or "sample.log"
             try:
                 parser.parse_file(filename)
-            except FileExistsError:
+            except FileNotFoundError:
                 print(f"文件不存在：{filename}, 请先生成测试日志")
 
         elif choice == "3":
@@ -94,11 +95,19 @@ def main():
                 continue
             keyword = input("搜索关键词：")
             results = parser.search_keyword(keyword)
-            print(f" [{e.level}] [{e.timestamp}] {e.message[:50]}")
+            print(f"\n找到{len(results)} 条包含 '{keyword}' 的日志:")
+            for e in results[:10]:
+                print(f" [{e.level}] [{e.timestamp}] {e.message[:50]}")
 
-        elif choice == "0":
-            print("再见！")
-            break
+        elif choice == "6":
+            if not parser.entries:
+                print("请先解析日志文件")
+                continue
+            from report_generator import ReportGenerator
+            report = parser.analyze()
+            rg = ReportGenerator()
+            rg.generate(report, "log_report.html")
+            print("用浏览器打开 log_report.html 查看报告")
         else:
             print("无效选择")
 
