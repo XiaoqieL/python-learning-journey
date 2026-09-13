@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Python入门教程",
+    "author": "张三",
+    "price": 299.0,
+    "publish_date": "2026-07-01",
+    "url": "https://example.com/1",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "爬虫实战指南",
+    "author": "李四",
+    "price": 399.0,
+    "publish_date": "2026-07-15",
+    "url": "https://example.com/2",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "数据库原理与实践",
+    "author": "王五",
+    "price": 199.0,
+    "publish_date": "2026-06-20",
+    "url": "https://example.com/3",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "算法与数据结构",
+    "author": "赵六",
+    "price": 499.0,
+    "publish_date": "2026-08-01",
+    "url": "https://example.com/4",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "网络协议详解",
+    "author": "钱七",
+    "price": 259.0,
+    "publish_date": "2026-07-28",
+    "url": "https://example.com/5",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "测试自动化完整教程",
+    "author": "孙八",
+    "price": 359.0,
+    "publish_date": "2026-07-10",
+    "url": "https://example.com/6",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "面向对象设计模式",
+    "author": "周九",
+    "price": 449.0,
+    "publish_date": "2026-06-25",
+    "url": "https://example.com/7",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "Git版本控制实战",
+    "author": "吴十",
+    "price": 99.0,
+    "publish_date": "2026-07-05",
+    "url": "https://example.com/8",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "数据结构与算法",
+    "author": "郑十一",
+    "price": 399.0,
+    "publish_date": "2026-07-20",
+    "url": "https://example.com/9",
+    "crawl_time": "2026-08-09 21:52:01"
+  },
+  {
+    "title": "并发编程",
+    "author": "王十二",
+    "price": 299.0,
+    "publish_date": "2026-07-12",
+    "url": "https://example.com/10",
+    "crawl_time": "2026-08-09 21:52:01"
+  }
+]
