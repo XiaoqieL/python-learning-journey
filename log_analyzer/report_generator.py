@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from pathlib import Path
-from models import AnalysisReport
+from log_analyzer.models import AnalysisReport
 
 
 class ReportGenerator:
@@ -64,7 +64,7 @@ class ReportGenerator:
                     <td>{err['message']}</td>
                 </tr>"""
         else:
-            recent_errors = '<tr><td colspan="3" style="text-align:center;color:#999">五=无错误日志</td></tr>'
+            recent_errors = '<tr><td colspan="3" style="text-align:center;color:#999">暂无错误日志</td></tr>'
 
         total = r.total_lines
         error_count = r.level_counts.get("ERROR", 0) + r.level_counts.get("CRITICAL", 0)
@@ -80,7 +80,7 @@ class ReportGenerator:
 <style>
 * {{ margin: 0; padding: 0; box-sizing: border-box; }}
 body{{ font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; padding: 20px; }}
-.header {{ background: liner-gradient(135deg, #557eea, #764ba2); color: #fff;
+.header {{ background: linear-gradient(135deg, #557eea, #764ba2); color: #fff;
            padding: 30px; border-radius: 12px; margin-bottom: 20px; }}
 .header h1 {{ font-size: 26px; margin-bottom: 8px; }}
 .header .meta {{ font-size: 13px; opacity: 0.9; }}
@@ -100,7 +100,7 @@ body{{ font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; pa
 .level-label {{ width: 80px; font-weight: bold; font-size: 14px; }}
 .bar-container {{ flex: 1; height: 24px; background: #f0f0f0; 
                   border-radius: 12px; overflow: hidden; margin: 0 12px; }}
-.bar-fill {{ height: 100%; border-redius: 12px; transition: width 0.5s; }}
+.bar-fil {{ height: 100%; border-radius: 12px; transition: width 0.5s; }}
 .level-count {{ width: 120px; font-size: 13px; color: #666; }}
 table {{ width: 100%; border-collapse: collapse; }}
 th {{ background: #fafafa; padding: 12px; text-align: left; font-size: 13px;

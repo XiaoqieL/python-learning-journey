@@ -1,8 +1,12 @@
 # ============ 日志分析系统 - 入口 ============
 
+from pathlib import Path
+
 from log_analyzer.parser import LogParser
 from log_analyzer.models import AnalysisReport
-from log_analyzer.log_generator import generate_log
+
+# 固定以本文件所在目录为基准，保证日志文件一定生成在 log_analyzer 文件夹里
+BASE_DIR = Path(__file__).resolve().parent
 
 
 def show_report(report: AnalysisReport):
@@ -54,17 +58,20 @@ def main():
           3. 查看分析报告
           4. 按级别过滤
           5. 关键词搜索
+          6. 生成HTML报告
           0. 退出
         """)
         choice = input("请选择：").strip()
 
         if choice == "1":
-            from log_generator import generate_log
+            from log_analyzer.log_generator import generate_log
             count = int(input("生成条数（默认200）:") or "200")
-            generate_log(count=count)
+            generate_log(filename=str(BASE_DIR / "sample.log"), count=count)
 
         elif choice == "2":
             filename = input("日志文件名(默认sample.log): ") or "sample.log"
+            if not Path(filename).is_absolute():
+                filename = str(BASE_DIR / filename)
             try:
                 parser.parse_file(filename)
             except FileNotFoundError:
@@ -103,11 +110,14 @@ def main():
             if not parser.entries:
                 print("请先解析日志文件")
                 continue
-            from report_generator import ReportGenerator
+            from log_analyzer.report_generator import ReportGenerator
             report = parser.analyze()
             rg = ReportGenerator()
             rg.generate(report, "log_report.html")
             print("用浏览器打开 log_report.html 查看报告")
+        elif choice == "0":
+            print("已退出，再见！")
+            break
         else:
             print("无效选择")
 

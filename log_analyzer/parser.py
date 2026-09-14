@@ -11,7 +11,7 @@ class LogParser:
     # 匹配格式：2026-09-03 10:30:45 [ERROR] message here
     PATTERN = re.compile(
         r"(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})\s"
-        r"$$(\w+)$$\s"
+        r"\[(\w+)\]\s"
         r"(.+)"
     )
 
