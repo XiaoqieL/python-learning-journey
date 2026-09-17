@@ -1,0 +1,6 @@
+host=localhost
+port=8080
+这行没有等号
+timeout=30
+input 也是坏格式
+debug=true
