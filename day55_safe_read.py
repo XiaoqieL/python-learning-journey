@@ -8,6 +8,8 @@ for line in open("config.txt", "r", encoding="utf-8"):
         print(f"Skipped line: {line}")
         continue
     else:
-        dictl[parts[0]] = parts[1]
+        key = parts[0].strip()
+        value = parts[1].strip()
+        dictl[key] = value
 print(f"成功解析 {len(dictl)} 条，跳过 {skipped} 条")
 print("Day55 打卡完成！")
