@@ -65,8 +65,12 @@ def main():
 
         if choice == "1":
             from log_analyzer.log_generator import generate_log
-            count = int(input("生成条数（默认200）:") or "200")
-            generate_log(filename=str(BASE_DIR / "sample.log"), count=count)
+            try:
+                count = int(input("生成条数（默认200）:") or "200")
+                generate_log(filename=str(BASE_DIR / "sample.log"), count=count)
+            except ValueError:
+                print("请输入数字")
+                continue
 
         elif choice == "2":
             filename = input("日志文件名(默认sample.log): ") or "sample.log"
