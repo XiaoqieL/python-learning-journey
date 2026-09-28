@@ -10,12 +10,15 @@ class Student:
         return self.score >= 60
 
 
-stu1 = Student('张三', 90)
-stu2 = Student('李四', 80)
-stu3 = Student('王五', 50)
-stu1.show()
-stu2.show()
-stu3.show()
-print(stu1.is_pass())
-print(stu2.is_pass())
-print(stu3.is_pass())
+# ----数据----
+student_data = [('张三', 90), ('李四', 80), ('王五', 50)]
+
+# ---- 批量创建----
+students = []
+for name, score in student_data:
+    students.append(Student(name, score))
+
+# -----批量展示----
+for stu in students:
+    stu.show()
+    print(f"及格: {stu.is_pass()}")
