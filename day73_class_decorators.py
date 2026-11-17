@@ -13,7 +13,7 @@ class Account:
         self.records = {}  # 记账字典{项目:金额}
         self.load()  # 启动时自动读文件
 
-   # @property
+    @property
     def total(self):
         return sum(self.records.values())
 
